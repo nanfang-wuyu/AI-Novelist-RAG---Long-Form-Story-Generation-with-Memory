@@ -1,0 +1,8 @@
+**/__pycache__/
+**/.vscode/
+**/.ipynb_checkpoints/
+**/.pytest_cache/
+data/
+docker/
+k8s/
+scripts/

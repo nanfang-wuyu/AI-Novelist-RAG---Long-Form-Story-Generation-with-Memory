@@ -1,0 +1,23 @@
+# model
+# torch>=2.0.0
+transformers>=4.36.0
+pillow>=9.0.0
+numpy
+bitsandbytes
+auto-gptq
+optimum
+gptqmodel
+sentence-transformers
+faiss-cpu
+# faiss-gpu
+
+# openai
+einops
+
+
+# fastapipip
+fastapi
+uvicorn
+
+#jupyter
+ipykernel
