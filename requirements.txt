@@ -9,7 +9,9 @@ optimum
 gptqmodel
 sentence-transformers
 faiss-cpu
-# faiss-gpu
+langchain
+langchain-community
+openai
 
 # openai
 einops
