@@ -1,4 +1,4 @@
-from app.models.model import model
+from app.models.model import LLM
 from fastapi import APIRouter, Form
 import re
 from pydantic import BaseModel
@@ -72,7 +72,7 @@ def extract_information_units(novel_passage: str = Form(...)):
     return {"extracted_units": extracted_units}
 
 def extract_info(text):
-    result = model.generate(text, role="You are an information extraction assistant.", max_new_tokens=2048, temperature=0.9, top_k=50, top_p=0.95)
+    result = LLM.generate(text, role="You are an information extraction assistant.", max_new_tokens=2048, temperature=0.9, top_k=50, top_p=0.95)
     print("Full response:", result)
     return result
 

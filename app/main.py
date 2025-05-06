@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from app.apis import generator, test, extractor
+# from app.Archived import test
+from app.apis import generator, extractor
 
 app = FastAPI(title="AI Novelist RAG")
 
