@@ -27,7 +27,7 @@ class TinyLlamaModel:
 
     def summarize(self, text: str, prompt: str = None, role: str = None, filename: str = '', max_new_tokens=200) -> str:
         
-        prompt = prompt if prompt else f"Summarize the following chapter within 150 words:\n\n{text}\n\nSummary:"
+        prompt = prompt if prompt else f"Write a SHORT summary recording the main plot and setting for the following content WITHIN 100 words:\n\n{text}\n\nSummary:"
 
         role = role if role else "You are a friendly chatbot who are a novelist and summarize the text in a concise manner"
         messages = [
