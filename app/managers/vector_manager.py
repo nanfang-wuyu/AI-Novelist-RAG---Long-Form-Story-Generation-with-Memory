@@ -1,8 +1,9 @@
 import os
 import faiss
 from typing import List, Optional
-from langchain.vectorstores import FAISS
-from langchain.docstore import InMemoryDocstore
+from langchain_community.vectorstores import FAISS
+# from langchain.docstore import InMemoryDocstore
+from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain.schema import Document
 from app.models.model import Embedding_model
 
@@ -29,11 +30,13 @@ def load_vectorstore(store_type: str) -> FAISS:
     assert store_type in VECTORSTORE_TYPES, "Invalid vectorstore type."
     path = os.path.join(BASE_PATH, VECTORSTORE_TYPES[store_type])
 
-    if os.path.exists(path):
+    if os.path.exists(os.path.join(path, 'index.faiss')):
+        print("Reload existing faiss")
         return FAISS.load_local(path, Embedding_model, allow_dangerous_deserialization=True)
     else:
+        print("Create new faiss")
         vs = create_new_vectorstore(Embedding_model)
-        vs.save_local(path)
+        save_vectorstore(vs, store_type)
         return vs
 
 

@@ -1,4 +1,4 @@
-from app.models.tinyllama import TinyLlamaModel
+# from app.models.tinyllama import TinyLlamaModel
 from app.models.gpt4omini import GPT4OMini
 from app.models.bart_large_cnn import BartSummaryModel
 from langchain_huggingface import HuggingFaceEmbeddings

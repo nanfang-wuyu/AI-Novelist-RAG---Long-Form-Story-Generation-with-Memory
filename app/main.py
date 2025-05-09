@@ -5,7 +5,6 @@ from app.apis import generator, extractor
 app = FastAPI(title="AI Novelist RAG")
 
 app.include_router(generator.router)
-app.include_router(test.router)
 app.include_router(extractor.router)
 
 

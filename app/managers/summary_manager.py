@@ -1,5 +1,4 @@
 import os
-from langchain.schema import Document
 from app.models.model import Summary_Model
 from app.managers import vector_manager as vm
 from app.managers.chapter_manager import get_latest_chapter_num, chapter_chain
@@ -47,9 +46,12 @@ def get_relevant_summaries(query: str, top_k: int = 10):
 
 def summary_chain(text: str, chapter_num: int = None) -> str:
     new_chapter_num = get_latest_chapter_num() + 1
+    print("I'm here 1")
     if chapter_num is None or chapter_num >= new_chapter_num:
         chapter_num = new_chapter_num
+        print("I'm here 2")
         summary = generate_summary(text)
+        print("I'm here 3")
         save_summary_to_file(summary, chapter_num)
         add_summary(summary, chapter_num)
     else:

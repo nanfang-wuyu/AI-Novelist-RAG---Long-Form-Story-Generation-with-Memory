@@ -21,8 +21,10 @@ class ChapterInput(BaseModel):
 @router.post("/generate")
 def generate_chapter(input: ChapterInput):
     result = chapter_chain(query=input.query)
-    summary_chain(result) # auto-call summary_chain
-    return result
+    print("chapter generated")
+    summary = summary_chain(result) # auto-call summary_chain
+    print("summary generated")
+    return {"chapter": result, "summary": summary}
 
 class ChapterOutput(BaseModel):
     chapter: str
@@ -34,6 +36,28 @@ def change_chapter(input: ChapterOutput):
     summary_chain(input.chapter, chapter_num=input.chapter_num)
     return True
     
+@router.post("/get_all")
+def get_all_chapters():
+    all_chapters = []
+    for filename in os.listdir("data/samples/raws"):
+        if filename.endswith(".txt"):
+            with open(os.path.join("data/samples/raws", filename), "r", encoding="utf-8") as f:
+                content = f.read()
+                all_chapters.append({"filename": filename, "content": content})
+    all_chapters.sort(key=lambda x: int(x["filename"].split("_")[1].split(".")[0]))
+    return all_chapters
+
+@router.post("/get_one")
+def get_one_chapter(chapter_num: int):
+    filename = f"chapter_{chapter_num:03}.txt"
+    filepath = os.path.join("data/samples/raws", filename)
+    if os.path.exists(filepath):
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
+        return {"filename": filename, "content": content}
+    else:
+        return {"error": "Chapter not found."}
+
 
 # @router.post("/generate")
 # def generate_text(request: GenerateRequest):

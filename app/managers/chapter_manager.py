@@ -1,26 +1,15 @@
-from langchain.chains import RetrievalQA
-from langchain.chains.llm import LLMChain
-from langchain.prompts import PromptTemplate
-from langchain.llms import OpenAI
-# from app.utils.memory import faiss_index
-from langchain.vectorstores import FAISS
-import numpy as np
 from app.models.model import LLM
 from app.utils.prompts import get_chapter_generation_prompt
 from app.managers import vector_manager as vm
 import os
-from langchain.docstore import InMemoryDocstore
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain.schema import Document
-import faiss
 
 SAVE_DIR = "data/samples/raws"
 os.makedirs(SAVE_DIR, exist_ok=True)
 
 
 
-def get_latest_chapter_num():
-    vectorstore = vm.load_vectorstore("summary")
+def get_latest_chapter_num(store_type="summary"):
+    vectorstore = vm.load_vectorstore(store_type)
     all_docs = vectorstore.docstore._dict.values()
     chapter_numbers = [doc.metadata.get("chapter", 0) for doc in all_docs if isinstance(doc.metadata.get("chapter", 0), int)]
     latest_chapter_num = max(chapter_numbers) if chapter_numbers else 0
@@ -48,7 +37,7 @@ def setup_prompt(query: str, context_info):
 
 
 def generate_chapter(prompt):
-    generated_chapter = LLM.generate(prompt, max_tokens=512)
+    generated_chapter = LLM.generate(prompt, max_tokens=2048)
     return generated_chapter
 
 def save_chapter_to_file(chapter: str, chapter_num: int):
@@ -78,8 +67,8 @@ def chapter_chain(query):
     context_info = get_latest_and_relevant_chapter_summaries(query)
     prompt = setup_prompt(query, context_info)
     chapter = generate_chapter(prompt)
-    chapter_num = context_info[0] + 1
-    save_chapter_to_file(chapter, chapter_num)
-    add_chapter(chapter, chapter_num)
-    return True
+    new_chapter_num = context_info[0] + 1
+    save_chapter_to_file(chapter, new_chapter_num)
+    add_chapter(chapter, new_chapter_num)
+    return chapter
 
