@@ -6,6 +6,6 @@ data/
 docker/
 k8s/
 # scripts/
-app/Archived
 Archived/
 .env
+app/tests/*

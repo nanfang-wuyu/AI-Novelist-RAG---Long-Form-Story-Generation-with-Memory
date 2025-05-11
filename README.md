@@ -1,4 +1,4 @@
-# AI Novelist RAG · Long-Form Story Generation with Memory
+# AI Novelist RAG - Long-Form Story Generation with Memory
 
 This is a dedicated AI system for generating long-form novels with coherent logic, consistent world-building, and thematic integrity, solving common LLMs issues like incoherence, self-contradiction, and theme drift.
 
@@ -25,7 +25,7 @@ ai-novelist-rag/
 │   ├── front_end/             # Gradio-based UI
 │   ├── managers/              # Managers and chains for chapter, summary, and vector memory
 │   ├── models/                # Model loading and wrapper logic
-│   ├── tests/                 # Jupyter notebooks for quick testing
+│   ├── tests/                 # (Not showed here) Jupyter notebooks for quick testing
 │   └── utils/                 # General utilities 
 │
 ├── data/                      # (Not showed here) Local store for texts, summaries, vector DB 
