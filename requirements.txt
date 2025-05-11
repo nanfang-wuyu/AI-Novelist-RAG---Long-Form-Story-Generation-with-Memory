@@ -1,6 +1,7 @@
-# model
+# AI
 # torch>=2.0.0
 transformers>=4.36.0
+huggingface_hub
 pillow>=9.0.0
 numpy
 bitsandbytes
@@ -12,14 +13,16 @@ faiss-cpu
 langchain
 langchain-community
 openai
-
-# openai
+pydantic
 einops
 
-
-# fastapipip
+# backend
 fastapi
 uvicorn
+
+# frontend
+gradio
+requests
 
 #jupyter
 ipykernel
