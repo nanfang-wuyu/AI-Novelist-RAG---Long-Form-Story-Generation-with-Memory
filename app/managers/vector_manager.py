@@ -53,26 +53,32 @@ def add_document(store_type: str, content: str, metadata: dict):
     save_vectorstore(vs, store_type)
 
 
-def update_document(store_type: str, chapter_id: str, new_content: str):
+def update_document(store_type: str, chapter_num: str, new_content: str):
+    print(f"Updating chapter {chapter_num} in store: {store_type}")
+    
     vs = load_vectorstore(store_type)
 
-    doc_ids = [
-        k for k, doc in vs.docstore._dict.items()
-        if doc.metadata.get("chapter") == chapter_id
+    target_doc_ids = [
+        doc_id for doc_id, doc in vs.docstore._dict.items()
+        if doc.metadata.get("chapter") == chapter_num
     ]
-    if not doc_ids:
-        raise ValueError(f"No document found for chapter: {chapter_id}")
+    
+    if not target_doc_ids:
+        raise ValueError(f"No document found for chapter: {chapter_num}")
 
-    docs = [
-        doc for k, doc in vs.docstore._dict.items()
-        if doc.metadata.get("chapter") != chapter_id
-    ]
-    new_doc = Document(page_content=new_content, metadata={"type": store_type, "chapter": chapter_id})
-    docs.append(new_doc)
+    for doc_id in target_doc_ids:
+        vs.delete([doc_id])
 
-    new_vs = create_new_vectorstore(Embedding_model)
-    new_vs.add_documents(docs)
-    save_vectorstore(new_vs, store_type)
+    new_doc = Document(
+        page_content=new_content,
+        metadata={"type": store_type, "chapter": chapter_num}
+    )
+    vs.add_documents([new_doc])
+
+    save_vectorstore(vs, store_type)
+
+    print(f"Chapter {chapter_num} successfully updated.")
+
 
 
 def get_relevant_documents(store_type: str, query: str, top_k: int = 10) -> List[Document]:

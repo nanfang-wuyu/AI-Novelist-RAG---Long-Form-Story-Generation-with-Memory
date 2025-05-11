@@ -6,7 +6,7 @@ import subprocess
 import json
 from ollama import generate
 import os
-from app.managers.chapter_manager import chapter_chain, save_chapter_to_file
+from app.managers.chapter_manager import chapter_chain, update_chapter
 from app.managers.summary_manager import summary_chain
 
 
@@ -32,9 +32,9 @@ class ChapterOutput(BaseModel):
 
 @router.post("/change")
 def change_chapter(input: ChapterOutput):
-    save_chapter_to_file(input.chapter, chapter_num=input.chapter_num)
+    update_chapter(input.chapter, chapter_num=input.chapter_num)
     summary_chain(input.chapter, chapter_num=input.chapter_num)
-    return True
+    return {"message": "Success"}
     
 @router.post("/get_all")
 def get_all_chapters():
@@ -45,11 +45,14 @@ def get_all_chapters():
                 content = f.read()
                 all_chapters.append({"filename": filename, "content": content})
     all_chapters.sort(key=lambda x: int(x["filename"].split("_")[1].split(".")[0]))
-    return all_chapters
+    return {"all_chapters": all_chapters}
 
+class ChapterNumber(BaseModel):
+    chapter_num: int
+    
 @router.post("/get_one")
-def get_one_chapter(chapter_num: int):
-    filename = f"chapter_{chapter_num:03}.txt"
+def get_one_chapter(input: ChapterNumber):
+    filename = f"chapter_{input.chapter_num:03}.txt"
     filepath = os.path.join("data/samples/raws", filename)
     if os.path.exists(filepath):
         with open(filepath, "r", encoding="utf-8") as f:

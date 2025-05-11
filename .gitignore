@@ -5,7 +5,7 @@
 data/
 docker/
 k8s/
-scripts/
+# scripts/
 app/Archived
 Archived/
 .env

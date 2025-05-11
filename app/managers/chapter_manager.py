@@ -52,13 +52,15 @@ def add_chapter(chapter: str, chapter_num: int):
         content=chapter,
         metadata={"type": "chapter", "chapter": chapter_num}
     )
+    save_chapter_to_file(chapter, chapter_num)
 
 def update_chapter(chapter: str, chapter_num: int):
     vm.update_document(
         store_type="chapter",
-        chapter_id=chapter_num,
+        chapter_num=chapter_num,
         new_content=chapter
     )
+    save_chapter_to_file(chapter, chapter_num)
 
 
     
@@ -68,7 +70,6 @@ def chapter_chain(query):
     prompt = setup_prompt(query, context_info)
     chapter = generate_chapter(prompt)
     new_chapter_num = context_info[0] + 1
-    save_chapter_to_file(chapter, new_chapter_num)
     add_chapter(chapter, new_chapter_num)
     return chapter
 

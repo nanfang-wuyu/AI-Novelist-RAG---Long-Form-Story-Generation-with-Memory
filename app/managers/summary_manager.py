@@ -25,15 +25,17 @@ def add_summary(summary: str, chapter_num: int):
         content=summary,
         metadata={"type": "summary", "chapter": chapter_num}
     )
+    save_summary_to_file(summary, chapter_num)
 
 
 def update_summary(summary: str, chapter_num: int):
     
     vm.update_document(
         store_type="summary",
-        chapter_id=chapter_num,
+        chapter_num=chapter_num,
         new_content=summary
     )
+    save_summary_to_file(summary, chapter_num)
 
 
 def get_relevant_summaries(query: str, top_k: int = 10):
@@ -46,16 +48,11 @@ def get_relevant_summaries(query: str, top_k: int = 10):
 
 def summary_chain(text: str, chapter_num: int = None) -> str:
     new_chapter_num = get_latest_chapter_num() + 1
-    print("I'm here 1")
     if chapter_num is None or chapter_num >= new_chapter_num:
         chapter_num = new_chapter_num
-        print("I'm here 2")
         summary = generate_summary(text)
-        print("I'm here 3")
-        save_summary_to_file(summary, chapter_num)
         add_summary(summary, chapter_num)
     else:
         summary = generate_summary(text)
-        save_summary_to_file(summary, chapter_num) # cover old file
         update_summary(summary, chapter_num)
     return summary
