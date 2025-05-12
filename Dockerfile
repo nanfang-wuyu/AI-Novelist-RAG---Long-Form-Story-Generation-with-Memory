@@ -25,6 +25,7 @@ RUN chmod +x scripts/start.sh
 
 RUN pip3 install --upgrade pip
 # RUN pip3 install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cu121
+RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 RUN pip3 install -r requirements.txt
 
 CMD ["bash", "start.sh"]
