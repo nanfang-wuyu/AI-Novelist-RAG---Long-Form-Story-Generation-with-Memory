@@ -9,3 +9,4 @@ k8s/
 Archived/
 .env
 app/tests/
+huggingface_manage.md

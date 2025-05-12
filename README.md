@@ -1,3 +1,14 @@
+---
+title: "AI Novelist RAG"
+emoji: "📚"
+colorFrom: "indigo"
+colorTo: "purple"
+sdk: gradio
+sdk_version: 4.28.3
+python_version: 3.10.16
+---
+
+
 # AI Novelist RAG - Long-Form Story Generation with Memory
 
 This is a dedicated AI system for generating long-form novels with coherent logic, consistent world-building, and thematic integrity, solving common LLMs issues like incoherence, self-contradiction, and theme drift.
