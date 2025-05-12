@@ -10,10 +10,10 @@ optimum
 gptqmodel
 sentence-transformers
 faiss-cpu
-langchain
-langchain-community
-langchain_huggingface
-openai
+langchain== 0.3.24
+langchain-community==0.3.23
+langchain_huggingface==0.1.2
+openai==1.76.0 
 pydantic
 einops
 
