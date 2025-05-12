@@ -7,6 +7,7 @@ sdk: docker
 sdk_version: 28.0.4
 python_version: 3.10.16
 app_port: 7860
+accelerator: cpu # gpu when local, be online in future
 ---
 
 

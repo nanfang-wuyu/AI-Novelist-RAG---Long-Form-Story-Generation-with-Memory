@@ -5,5 +5,6 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 # model = TinyLlamaModel()
 LLM = GPT4OMini()
-Summary_Model = BartSummaryModel()
+# Summary_Model = BartSummaryModel()
+Summary_Model = GPT4OMini()
 Embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
