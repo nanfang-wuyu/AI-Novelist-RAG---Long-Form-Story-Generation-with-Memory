@@ -12,6 +12,7 @@ sentence-transformers
 faiss-cpu
 langchain
 langchain-community
+langchain_huggingface
 openai
 pydantic
 einops
