@@ -44,7 +44,7 @@ ai-novelist-rag/
 ├── docker/                    # Dockerfile and config for deployment
 ├── scripts/
 │   ├── setup.sh               # Install dependencies
-│   └── launch_local.sh        # Launch the app locally
+│   └── start.sh               # Start the app program
 │
 ├── requirements.txt
 ├── README.md
@@ -59,10 +59,10 @@ ai-novelist-rag/
 bash scripts/setup.sh
 ```
 
-2. Launch the app locally:
+2. Start the app program:
 
 ```bash
-bash scripts/launch_local.sh
+bash scripts/startl.sh
 ```
 
 Default setup:
