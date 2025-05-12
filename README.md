@@ -62,7 +62,7 @@ bash scripts/setup.sh
 2. Start the app program:
 
 ```bash
-bash scripts/startl.sh
+bash scripts/start.sh
 ```
 
 Default setup:
