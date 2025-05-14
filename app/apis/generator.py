@@ -1,10 +1,5 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from datetime import datetime
-from app.models.model import LLM
-import subprocess
-import json
-from ollama import generate
 import os
 from app.managers.chapter_manager import chapter_chain, update_chapter
 from app.managers.summary_manager import summary_chain
