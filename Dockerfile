@@ -1,5 +1,5 @@
 ### For CPU
-# FROM python:3.10-slim
+FROM python:3.10-slim
 
 # RUN apt-get update && apt-get install -y git curl libgl1-mesa-glx && rm -rf /var/lib/apt/lists/*
 
@@ -13,13 +13,24 @@
 
 ### For GPU
 
-FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
+# FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
 
-RUN apt-get update && apt-get install -y python3.10 python3-pip git curl
+# RUN apt-get update && apt-get install -y python3.10 python3-pip git curl
 
+# Set up a new user named "user" with user ID 1000
+RUN useradd -m -u 1000 user
 
-WORKDIR /
-COPY . /
+# Switch to the "user" user
+USER user
+
+# Set home to the user's home directory
+ENV HOME=/home/user \
+	PATH=/home/user/.local/bin:$PATH
+
+WORKDIR $HOME/app
+RUN pip install --no-cache-dir --upgrade pip
+
+COPY --chown=user . $HOME/app
 
 RUN chmod +x scripts/start.sh
 
