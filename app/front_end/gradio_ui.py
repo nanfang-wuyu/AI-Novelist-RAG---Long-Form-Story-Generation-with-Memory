@@ -1,7 +1,8 @@
 import gradio as gr
 import requests
 
-API_BASE = "http://localhost:8000"
+# API_BASE = "http://localhost:8000"
+API_BASE = ""
 
 def get_texts(lang):
     if lang == "中文":
