@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "AI Novelist RAG"
 emoji: "📚"
 colorFrom: "indigo"
@@ -8,7 +8,7 @@ sdk_version: 28.0.4
 python_version: 3.10.16
 app_port: 7860
 accelerator: cpu # gpu when local, be online in future
----
+--- -->
 
 
 # AI Novelist RAG - Long-Form Story Generation with Memory
