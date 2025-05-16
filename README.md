@@ -49,6 +49,7 @@ ai-novelist-rag/
 │
 ├── requirements.txt
 ├── README.md
+├── Dockerfile
 └── .gitignore
 ```
 
